@@ -38,6 +38,12 @@ resp = urlopen(Request(access_token_url, headers=headers))
 token = resp.read()
 
 m = re.match(r'oauth_token=(?P<key>[^&]+)&oauth_token_secret=(?P<secret>[^&]+)', token)
+
+def hello():
+    if m:
+        oauth_token = oauth.OAuthToken(m.group('key'), m.group('secret'))
+        return oauth_token
+
 def fanfou(url,data=None):
     if m:
         oauth_token = oauth.OAuthToken(m.group('key'), m.group('secret'))
@@ -54,4 +60,5 @@ def fanfou(url,data=None):
             req  = Request(url_start+url+url_end, data, headers=headers)
             resp = urlopen(req)
         resp = resp.read()
-        return oauth_token
+        print resp 
+hello()
