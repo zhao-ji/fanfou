@@ -3,6 +3,7 @@
 # codeby @nightwish
 
 import web
+import time
 from url import urls
 
 db = web.database(dbn='mysql',user='root',pw='password',db='fanfou')
