@@ -9,10 +9,11 @@ from url import urls
 db = web.database(dbn='mysql',user='root',pw='password',db='fanfou')
 render = web.template.render('templates/')
 
+app = web.application(urls, globals())
+
 if __name__ == "__main__":
-    web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
-    app = web.application(urls, globals())
-    time.sleep(1)
+    #web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)
+    #time.sleep(1)
     app.run()
 
 

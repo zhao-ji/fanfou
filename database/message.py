@@ -23,8 +23,7 @@ def save(message,source):
    数据库over字段自动设置为0
           id字段自增
     '''
-    if chardet.detect(message)['encoding']=='utf-8':
-        message=unicode(message,'utf-8')
+    message=unicode(message,'utf-8')
     db.insert('fanfou' ,source=source ,over=0 ,content=message)
     
 def text_get():
