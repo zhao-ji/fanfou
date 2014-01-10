@@ -25,7 +25,7 @@ def request_to_header(request, realm=''):
     return {'Authorization': auth_header}
     
 def  get(url, **args):
-    url  = 'http://api.fanfou.com/' + url + '.xml'
+    url  = 'http://api.fanfou.com/%s.xml' %url
     request = oauth.OAuthRequest.from_consumer_and_token(consumer,
                                                      token=oauth_token,
                                                      http_method='GET',
@@ -37,10 +37,11 @@ def  get(url, **args):
     req  = urllib2.Request(url,headers=headers)
     try:
         result    = urllib2.urlopen(req)
-        code, xml = result.getcode(), result.read()
-        return code,xml
-    except urllib2.HTTPError:
-        print urllib2.HTTPError.info
+    except Exception,e:
+        print e 
+        return 
+    code, xml = result.getcode(), result.read()
+    return code,xml
     
 '''def post(url, **args):
     url  = 'http://api.fanfou.com/' + url + '.xml'
