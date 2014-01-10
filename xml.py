@@ -19,15 +19,18 @@ class xmlmsg:
                 xml = etree.fromstring(xml)
             except Exception,e:
                 m   = file('/home/nightwish/Music/fanfou/error.txt','a')
-                s = '文件：%d.xml  :%s' %(i,e)
+                s = '文件：%d.xml  :%s \n' %(i,e)
                 m.write(s)
                 m.close()
+                continue
             for j in range(len(xml)-1,-1,-1):
                 try:
                     talk = xml[j][0].text.encode('utf-8')
                 except Exception,e:
                     m   = file('/home/nightwish/Music/fanfou/error.txt','a')
-                    s = '文件：%d.xml  第%d行   :%s' %(i,j,e)
+                    s = '文件：%d.xml  第%d行   :%s \n' %(i,j,e)
                     m.write(s)
                     m.close()
+                    continue
                 message.save(talk,0)
+            
