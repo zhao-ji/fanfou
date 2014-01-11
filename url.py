@@ -7,6 +7,6 @@ from weixin.wechat import wechatmsg
 
 urls  = ('/wechat',wechatmsg,
        '/dm_fetch',directmsg,
-       '/xml_fetch',xmlmsg,
+#       '/xml_fetch',xmlmsg,
        '/text_sent',sendtext,
        '/photo_sent',sendphoto)
