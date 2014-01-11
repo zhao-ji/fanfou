@@ -1,6 +1,0 @@
-create table fanfou(
-id int(6) primary key auto_increment ,  #talk id
-source int(2) not null,                 #来源 xml=00  微信=01  私信=10
-over bool default 0,                    #是否发送 未发送=0  发送=1
-content varchar(250)                    #talk   长度为250字
-)CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
