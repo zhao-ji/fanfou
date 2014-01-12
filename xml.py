@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding=utf-8 -*-
 
-from database import message
+import message
 from lxml     import etree
 import chardet
 import sys
