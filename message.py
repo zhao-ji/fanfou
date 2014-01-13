@@ -24,7 +24,7 @@ def save(message,source):
           id字段自增
     '''
     
-    message=unicode(message,'utf-8')
+    #message=unicode(message,'utf-8')
     db.insert('fanfou' ,source=source ,over=0 ,content=message)
     
 def text_get():

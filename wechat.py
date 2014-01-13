@@ -2,9 +2,12 @@
 #-*- coding=utf-8 -*-
 
 import web
+import hashlib, time, re
+import urllib, urllib2
 import message
 import hanzi
 import photo
+from lxml import etree
 
 render = web.template.render('templates/')
 

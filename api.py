@@ -21,7 +21,7 @@ signature_method   = oauth.OAuthSignatureMethod_HMAC_SHA1()
 consumer           = oauth.OAuthConsumer(consumer_key, consumer_secret)
 oauth_token        = oauth.OAuthToken(oauth_token_key, oauth_token_secret)
 
-def request_to_header(request, args={}, realm=''):
+def request_to_header(request, realm=''):
     """Serialize as a header for an HTTPAuth request."""
     auth_header = 'OAuth realm="%s"' % realm
         # Add the oauth parameters.
@@ -29,9 +29,6 @@ def request_to_header(request, args={}, realm=''):
         for k, v in request.parameters.iteritems():
             if k.startswith('oauth_') or k.startswith('x_auth_'):
                 auth_header += ', %s="%s"' % (k, oauth.escape(str(v)))
-    if args:
-        for k, v in args.iteritems():
-            auth_header += ', %s="%s"' % (k, oauth.escape(str(v)))
     return {'Authorization': auth_header}
     
 def  get(url, **args):
@@ -42,7 +39,9 @@ def  get(url, **args):
                                                      http_url=url,
                                                      parameters={})
     request.sign_request(signature_method, consumer, oauth_token)
-    headers=request_to_header(request, args)
+    headers=request_to_header(request)
+    headers.update(args)
+    headers['Content-Type']='application/x-www-form-urlencoded'
     req  = urllib2.Request(url, headers=headers)
     try:
         result    = urllib2.urlopen(req)
