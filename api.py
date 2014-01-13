@@ -40,7 +40,7 @@ def  get(url, **args):
                                                      token=oauth_token,
                                                      http_method='GET',
                                                      http_url=url,
-                                                     parameters=args)
+                                                     parameters={})
     request.sign_request(signature_method, consumer, oauth_token)
     headers=request_to_header(request, args)
     req  = urllib2.Request(url, headers=headers)
@@ -95,4 +95,4 @@ def post(url, **args):
     return code,xml
     
 if __name__ == '__main__':
-    get('direct_messages/inbox')
+    get('direct_messages/inbox',count=1)
