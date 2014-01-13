@@ -5,8 +5,8 @@ import sys, urllib, re
 import oauth.oauth as oauth
 from urllib2 import Request, urlopen
 
-consumer_key = 'd407ba07ae8902c1e259f9f0166e8b56'   # api key
-consumer_secret = 'db21de28bf0f763834e40469ffdf64e4'  # api secret
+consumer_key = '9eab891a46e90644738442f4c03d461b'   # api key
+consumer_secret = 'acce8a65db9d239e8ba5d9865ac6a1d6'  # api secret
 access_token_url = 'http://fanfou.com/oauth/access_token'
 url_start = 'http://api.fanfou.com/'
 url_end = '.xml'
@@ -42,5 +42,7 @@ m = re.match(r'oauth_token=(?P<key>[^&]+)&oauth_token_secret=(?P<secret>[^&]+)',
 def get_oauth_token():
     if m:
         oauth_token = oauth.OAuthToken(m.group('key'), m.group('secret'))
-        return oauth_token
+        print oauth_token
 
+if __name__ == '__main__':
+    get_oauth_token()

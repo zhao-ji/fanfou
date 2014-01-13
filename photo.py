@@ -2,6 +2,7 @@
 # coding=utf-8 
 
 import urllib, urllib2
+import api
     
 url = 'http://mmbiz.qpic.cn/mmbiz/1uagWiaQhNzMldFBbn6u2wKyr1Uzsw7Ctx5GRpw9gSofube3MFVLYEZ44Fv9sqsz0MOsNj0o3m8ZFAoYPRGRyicg/0'
     
@@ -23,6 +24,8 @@ def save(name,url):
     f.write(pic)
     f.close()
     
+    code,xml=api.post('photos/upload',photo=pic)
+    print code,xml
         
 if __name__ == '__main__':
     save('s',url)
