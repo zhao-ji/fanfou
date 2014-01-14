@@ -59,6 +59,9 @@ def get_ten_string(wechat):
             send_num+=1
         num = start+send_num
         db.update('timeline', where='wechat=$wechat', num=num, vars=locals())
-        return string
+        print string
     else:return hanzi.rdall
+    
+if __name__ == '__main__':
+    get_ten_string('asdf')
 
