@@ -41,8 +41,12 @@ class wechatmsg:
                 
         elif msgType=='text' :
             content  = xml.find("Content").text
-            message.save(content,1)
-            return render.weixin(fromUser,toUser,int(time.time()),hanzi.txtok)
+            if content=="。":
+                id   = db.select('timeline', what='num', where='wechat=$fromUser', vars=locals())
+                talk = db.select('fanfou', what='')
+            else:
+                message.save(content,1)
+                return render.weixin(fromUser,toUser,int(time.time()),hanzi.txtok)
             
         elif msgType=='image':
             pic_url  = xml.find("PicUrl").text
