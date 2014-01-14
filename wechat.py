@@ -10,6 +10,7 @@ import photo
 from lxml import etree
 
 render = web.template.render('templates/')
+db     = web.database(dbn='mysql',user='root',pw='password',db='fanfou')
 
 class wechatmsg:
     def GET(self):
@@ -31,6 +32,9 @@ class wechatmsg:
         if msgType=='event':
             event = xml.find("Event").text
             if   event == 'subscribe'  :
+                count = db.select('fanfou' ,what="count(id)") 
+                count = count[0].count
+                db.insert('timeline', weixin=fromUser ,num=count)
                 return render.weixin(fromUser,toUser,int(time.time()),hanzi.hello)
             elif event == 'unsubscribe':
                 pass
