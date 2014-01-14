@@ -4,5 +4,5 @@
 #from xml    import xmlmsg
 from wechat import wechatmsg
 
-urls  = ('/','wechatmsg')
+urls  = ('/',wechatmsg)
        #'/xml_fetch',xmlmsg
