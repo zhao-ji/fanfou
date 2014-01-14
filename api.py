@@ -23,6 +23,7 @@ oauth_token        = oauth.OAuthToken(oauth_token_key, oauth_token_secret)
 
 def request_to_header(request, realm=''):
     """Serialize as a header for an HTTPAuth request."""
+    #auth_header = 'OAuth realm="%s"' % realm
     auth_header = 'OAuth realm="%s"' % realm
         # Add the oauth parameters.
     if request.parameters:
@@ -33,15 +34,16 @@ def request_to_header(request, realm=''):
     
 def  get(url, **args):
     url  = 'http://api.fanfou.com/%s.xml' %url
+    query = args
     request = oauth.OAuthRequest.from_consumer_and_token(consumer,
                                                      token=oauth_token,
                                                      http_method='GET',
                                                      http_url=url,
-                                                     parameters={})
+                                                     parameters=query)
     request.sign_request(signature_method, consumer, oauth_token)
     headers=request_to_header(request)
-    headers.update(args)
-    headers['Content-Type']='application/x-www-form-urlencoded'
+    headers.update(query)
+    print headers
     req  = urllib2.Request(url, headers=headers)
     try:
         result    = urllib2.urlopen(req)
@@ -91,7 +93,7 @@ def post(url, **args):
     req  = urllib2.Request(url, data=data, headers=args1)
     result    = urllib2.urlopen(req)
     code, xml = result.getcode(), result.read()
-    return code,xml
+    print code,xml
     
 if __name__ == '__main__':
     get('direct_messages/inbox',count=1)

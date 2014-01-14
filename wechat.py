@@ -42,8 +42,8 @@ class wechatmsg:
         elif msgType=='text' :
             content  = xml.find("Content").text
             if content=="。":
-                id   = db.select('timeline', what='num', where='wechat=$fromUser', vars=locals())
-                talk = db.select('fanfou', what='')
+                string = message.get_ten_string(fromUser)
+                return render.weixin(fromUser,toUser,int(time.time()),string)
             else:
                 message.save(content,1)
                 return render.weixin(fromUser,toUser,int(time.time()),hanzi.txtok)
