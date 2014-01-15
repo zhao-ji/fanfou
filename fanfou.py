@@ -24,3 +24,30 @@ def sendtext():
     if code == 1:
         message.over(id)
 
+if __name__ == '__main__':
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    sendtext()
+    
+    
+    
+    
