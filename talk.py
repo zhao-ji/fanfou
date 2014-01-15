@@ -12,7 +12,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def get_string(wechat):
-    conn=MySQLdb.connect(host='localhost',db='fanfou',user='root',passwd='password')
+    conn=MySQLdb.connect(host='localhost',db='fanfou',user='root',passwd='password',charset='utf8')
     cursor=conn.cursor()
     cursor.execute('select num from timeline where wechat=%s',(wechat,))
     start = cursor.fetchone()
@@ -23,19 +23,13 @@ def get_string(wechat):
     if talk:
         send_num = 0
         for i in talk:
-            string+=i[0].encode('raw_unicode_escape')
-            string+='\n'
-            send_num+=1
+            string+=i[0] 
+            string+='\n \n'
+            send_num=send_num+1
         num = start+send_num
         cursor.execute('update timeline set num=%s where wechat=%s',(num,wechat))
-        cursor.close()
-        conn.close()
-        return string
-    else:
-        return hanzi.rdall
-        cursor.close()
-        conn.close()
-    
-if __name__ == '__main__':
-    get_string('o1MyYt0yCh7P_Q4b36pfPxfmtLbk')
-
+        conn.commit()
+    else:string=hanzi.rdall
+    cursor.close()
+    conn.close()
+    return string
