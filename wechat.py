@@ -5,6 +5,7 @@ import web
 import hashlib, time, re
 import urllib, urllib2
 import message
+import talk 
 import hanzi
 import photo
 from lxml import etree
@@ -42,7 +43,7 @@ class wechatmsg:
         elif msgType=='text' :
             content  = xml.find("Content").text
             if content=="。":
-                string = message.get_ten_string(fromUser)
+                string = talk.get_string(fromUser)
                 return render.weixin(fromUser,toUser,int(time.time()),string)
             else:
                 message.save(content,1)
