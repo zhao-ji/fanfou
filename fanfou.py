@@ -1,31 +1,26 @@
 #!/usr/bin/env python
 #-*- coding=utf-8 -*-
 
-from lxml     import etree
-from database import message
-from fan      import api
+from lxml import etree
+import message
+import api
 
-class directmsg:
-    def GET(self):
-        code,xml = api.fanfou('direct_messages/inbox')
-        while code==200:
-            xml    = etree.fromstring(xml)
-            num    = len(xml)
+def directmsg():
+    xml = api.get('direct_messages/inbox')
+    if xml:
+        xml    = etree.fromstring(xml)
+        num    = len(xml)
+        if num>0:
             for i in range(num):
                 id     = xml[i][0].text
                 msg    = xml[i][1].text
                 message.save(msg,2)
-                code,xml = api.fanfou('direct_messages/destroy',{'id':id})
-                while code != 200:code,xml = api.fanfou('direct_messages/destroy',{'id':id})
+                code   = api.post('direct_messages/destroy',id=id)
+                while code != 1:code,xml = api.fanfou('direct_messages/destroy',{'id':id})
 
-class sendtext:
-    def GET(self):
-        id,content = message.text_get()
-        code,xml = api.fanfou('statuses/update',{'statuses':content})
-        while code==200:message.over(id)
+def sendtext():
+    id,content = message.get_text()
+    code       = api.post('statuses/update',status=content)
+    if code == 1:
+        message.over(id)
 
-class sendphoto:
-    def GET(self):
-        id,content = message.photo_get()
-        code,xml = api.fanfou('photos/uploads',{'statuses':content})
-        while code==200:message.over(id)

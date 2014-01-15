@@ -22,5 +22,5 @@ def save(name,url):
     f.write(pic)
     f.close()
     
-    #code,xml=api.post('photos/upload',photo=pic)
-    return 1
+    code=api.post('photos/upload',photo=pic)
+    return code

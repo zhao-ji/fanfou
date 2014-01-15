@@ -40,5 +40,5 @@ def over(id):
    输入消息id
    无输出
     '''
-    db.update('fanfou' ,where='id=$id' ,over=1 ,vars=locals())    
+    db.update('fanfou' ,where='id=$id' ,over=1 ,vars=locals())
     
