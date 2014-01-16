@@ -19,6 +19,11 @@ def directmsg():
                 while code != 1:code,xml = api.fanfou('direct_messages/destroy',{'id':id})
 
 def sendtext():
+    xml        = api.get('account/rate_limit_status')
+    xml        = etree.fromstring(xml)
+    limit_num  = xml[1].text
+    if limit_num == 0:
+        return
     id,content = message.get_text()
     code       = api.post('statuses/update',status=content)
     if code == 1:
@@ -36,18 +41,4 @@ if __name__ == '__main__':
     sendtext()
     sendtext()
     sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    sendtext()
-    
-    
-    
-    
+    directmsg() 

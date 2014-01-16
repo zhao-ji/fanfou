@@ -32,7 +32,11 @@ def get_text():
     '''
     item = db.select('fanfou' ,what='id,content' ,limit=1 ,where='over=0 and source<3')
     talk = item[0]
-    return talk.id ,talk.content.encode('utf-8')
+    try:
+        a=talk.content.encode('utf-8')
+        return talk.id,a
+    except:
+        return talk.id,talk.id
         
 def over(id):
     '''
