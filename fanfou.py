@@ -4,6 +4,8 @@
 from lxml import etree
 import message
 import api
+import string
+import time
 
 def directmsg():
     xml = api.get('direct_messages/inbox')
@@ -22,7 +24,7 @@ def sendtext():
     xml        = api.get('account/rate_limit_status')
     xml        = etree.fromstring(xml)
     limit_num  = xml[1].text
-    if limit_num == 0:
+    if string.atoi(limit_num) == 0:
         return
     id,content = message.get_text()
     code       = api.post('statuses/update',status=content)
@@ -31,14 +33,25 @@ def sendtext():
 
 if __name__ == '__main__':
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     sendtext()
+    time.sleep(4.5)
     directmsg() 
