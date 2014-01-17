@@ -20,7 +20,7 @@ def get_string(wechat):
     cursor.execute('select content from fanfou where id>%s limit 10',(start,))
     talk  = cursor.fetchall()
     string= ''
-    if talk:
+    if len(talk):
         send_num = 0
         for i in talk:
             string+=i[0] 
@@ -29,7 +29,9 @@ def get_string(wechat):
         num = start+send_num
         cursor.execute('update timeline set num=%s where wechat=%s',(num,wechat))
         conn.commit()
-    else:string=hanzi.rdall
+        return string.encode('utf-8')
+    else:
+        return 0
+        #string=hanzi.rdall.decode('utf-8')
     cursor.close()
     conn.close()
-    return string

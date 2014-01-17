@@ -10,6 +10,8 @@ import time
 import hashlib
 import binascii
 import urlparse
+from poster.encode import multipart_encode
+from poster.streaminghttp import register_openers
 
 consumer_key       = "9eab891a46e90644738442f4c03d461b"
 consumer_secret    = "acce8a65db9d239e8ba5d9865ac6a1d6"
@@ -69,3 +71,31 @@ def  post(url,**args):
             return 1
     except Exception,e:
         return 0
+
+def  post_photo():
+    register_openers()
+    url  = 'http://api.fanfou.com/photos/upload.xml' 
+    f    = file('/var/www/fanfou/picture/1.jpg','rb')
+    pic  = f.read()
+    f.close()
+    values = {'photo':pic}
+    data, headers = multipart_encode(values)
+    request = oauth.OAuthRequest.from_consumer_and_token(consumer,
+                                                     token=oauth_token,
+                                                     http_method='POST',
+                                                     http_url=url,
+                                                     parameters={})
+    request.sign_request(signature_method, consumer, oauth_token)
+    headers.update(request_to_header(request))
+    #headers['Content-Type']='multipart/form-data'
+    req  = urllib2.Request(url, data, headers=headers)
+    req.unverifiable = True
+    try:
+        result = urllib2.urlopen(req)
+        code   = result.getcode()
+        if code==200:
+            return 1
+    except Exception,e:
+        print e,e.code,e.read()
+if __name__ == '__main__':
+    post_photo()
