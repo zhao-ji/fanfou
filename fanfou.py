@@ -27,6 +27,7 @@ def sendtext():
     if string.atoi(limit_num) == 0:
         return
     id,content = message.get_text()
+    if id==0:return
     code       = api.post('statuses/update',status=content)
     #if code == 1:
     message.over(id)

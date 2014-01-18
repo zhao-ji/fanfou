@@ -31,6 +31,7 @@ def get_text():
    输出id,text
     '''
     item = db.select('fanfou' ,what='id,content' ,limit=1 ,where='over=0 and source<3')
+    if len(item)==0:return 0,0
     talk = item[0]
     try:
         a=talk.content.encode('utf-8')
