@@ -42,7 +42,7 @@ class wechatmsg:
                 
         elif msgType=='text' :
             content  = xml.find("Content").text
-            if content=="。":
+            if content.strip()=="。":
                 string = talk.get_string(fromUser)
                 return render.weixin(fromUser,toUser,int(time.time()),string)
             else:
@@ -54,7 +54,7 @@ class wechatmsg:
             msg_id   = xml.find("MsgId").text
             info     = photo.save(msg_id, pic_url)
             if info == 1:
-                return render.weixin(fromUser,toUser,int(time.time()),hanzi.cnfse)
+                return render.weixin(fromUser,toUser,int(time.time()),hanzi.picok)
             
         else:
             return render.weixin(fromUser,toUser,int(time.time()),hanzi.cnfse)
