@@ -33,9 +33,7 @@ def sendtext():
     message.over(id)
 
 if __name__ == '__main__':
-    sendtext()
-    time.sleep(3)
-    sendtext()
+    directmsg() 
     time.sleep(3)
     sendtext()
     time.sleep(3)

@@ -22,5 +22,5 @@ def save(name,url):
     f.close()
     
     code=api.post_photo('/var/www/fanfou/picture/%s.jpg'% name)
-    print code
+    return code
     

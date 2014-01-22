@@ -94,6 +94,6 @@ def  post_photo(position):
         result = urllib2.urlopen(req)
         if result.getcode()==200:
             return 1
-    except :
-        return 0
+    except Exception,e:
+        return e.read()
 

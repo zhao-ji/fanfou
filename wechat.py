@@ -55,6 +55,8 @@ class wechatmsg:
             info     = photo.save(msg_id, pic_url)
             if info == 1:
                 return render.weixin(fromUser,toUser,int(time.time()),hanzi.picok)
+            else:
+                return render.weixin(fromUser,toUser,int(time.time()),info)
             
         else:
             return render.weixin(fromUser,toUser,int(time.time()),hanzi.cnfse)
