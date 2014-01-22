@@ -5,7 +5,6 @@ import urllib, urllib2
 import api
     
 def save(name,url):
-    
     headers = {}
     headers['User-Agent']      = 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:22.0) Gecko/20100101 Firefox/22.0'
     headers['Accept']          = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
@@ -22,5 +21,6 @@ def save(name,url):
     f.write(pic)
     f.close()
     
-    code=api.post('photos/upload',photo=pic)
-    return code
+    code=api.post_photo('/var/www/fanfou/picture/%s.jpg'% name)
+    print code
+    
