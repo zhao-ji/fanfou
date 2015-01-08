@@ -23,7 +23,7 @@ def request_to_header(request, realm=''):
 
 consumer = oauth.OAuthConsumer(consumer_key, consumer_secret)
 params = {}
-params["x_auth_username"] = 'daojunhuangdi@gmail.com'
+params["x_auth_username"] = 'kuailkaiba@gmail.com'
 params["x_auth_password"] = 'sfjnz6Wayol'
 params["x_auth_mode"] = 'client_auth'
 request = oauth.OAuthRequest.from_consumer_and_token(consumer,
