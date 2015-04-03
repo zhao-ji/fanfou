@@ -1,44 +1,34 @@
 #!/usr/bin/env python
 #-*- coding=utf-8 -*-
 
-from lxml import etree
-import message
-import api
 import string
 import time
 
-def directmsg():
+from lxml import etree
+
+import api
+
+def get_directmsg():
     xml = api.get('direct_messages/inbox')
     if xml:
-        xml    = etree.fromstring(xml)
-        num    = len(xml)
-        if num>0:
+        xml = etree.fromstring(xml)
+        num = len(xml)
+        if num > 0:
             for i in range(num):
-                id     = xml[i][0].text
-                msg    = xml[i][1].text
-                message.save(msg,2)
-                code   = api.post('direct_messages/destroy',id=id)
-                while code != 1:code,xml = api.fanfou('direct_messages/destroy',{'id':id})
+                id = xml[i][0].text
+                msg = xml[i][1].text
+                sendtext(content)
+                code = api.post('direct_messages/destroy', id=id)
+                while code != 1:
+                    code, xml = api.fanfou('direct_messages/destroy',{'id':id})
 
-def sendtext():
-    xml        = api.get('account/rate_limit_status')
-    xml        = etree.fromstring(xml)
-    limit_num  = xml[1].text
+def sendtext(content):
+    xml = api.get('account/rate_limit_status')
+    xml = etree.fromstring(xml)
+    limit_num = xml[1].text
     if string.atoi(limit_num) == 0:
         return
-    id,content = message.get_text()
-    if id==0:return
-    code       = api.post('statuses/update',status=content)
-    #if code == 1:
-    message.over(id)
+    code = api.post('statuses/update',status=content)
 
 if __name__ == '__main__':
-    directmsg() 
-    time.sleep(3)
-    sendtext()
-    time.sleep(3)
-    sendtext()
-    time.sleep(3)
-    sendtext()
-    time.sleep(3)
-    directmsg() 
+    directmsg()

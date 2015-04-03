@@ -4,8 +4,8 @@
 
 import web
 import time
-import MySQLdb
-from url import urls
+
+urls  = ('/',wechatmsg)
 
 if __name__ == "__main__":
     web.wsgi.runwsgi = lambda func, addr=None: web.wsgi.runfcgi(func, addr)

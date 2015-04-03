@@ -23,7 +23,7 @@ def get_string(wechat):
     if len(talk):
         send_num = 0
         for i in talk:
-            string+=i[0] 
+            string+=i[0]
             string+='\n \n'
             send_num=send_num+1
         num = start+send_num

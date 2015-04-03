@@ -19,4 +19,3 @@ class xmlmsg:
             for j in range(len(xml)-1,-1,-1):
                 talk = xml[j][0].text.encode('utf-8')
                 message.save(talk,0)
-            
