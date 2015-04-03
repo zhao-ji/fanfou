@@ -8,7 +8,7 @@ from lxml import etree
 
 import api
 
-def get_directmsg():
+def directmsg():
     xml = api.get('direct_messages/inbox')
     if xml:
         xml = etree.fromstring(xml)
@@ -31,4 +31,6 @@ def sendtext(content):
     code = api.post('statuses/update',status=content)
 
 if __name__ == '__main__':
-    directmsg()
+    while True:
+        directmsg()
+        time.sleep(60)
