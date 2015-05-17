@@ -46,7 +46,7 @@ class wechatmsg:
         elif msgType=='image':
             pic_url  = xml.find("PicUrl").text
             msg_id   = xml.find("MsgId").text
-            info     = photo.save(pic_url)
+            info     = photo.save(pic_url, msg_id)
             if info == 1:
                 return render.weixin(fromUser,toUser,int(time.time()),hanzi.picok)
             else:
