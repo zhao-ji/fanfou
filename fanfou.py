@@ -18,6 +18,8 @@ def directmsg():
             for i in range(num):
                 id = xml[i][0].text
                 msg = xml[i][1].text
+                if not msg:
+                    continue
                 logbook.info(msg.encode("utf8"))
                 sendtext(msg.encode("utf8"))
                 code = api.post('direct_messages/destroy', id=id)
@@ -29,9 +31,11 @@ def sendtext(content):
     xml = api.get('account/rate_limit_status')
     xml = etree.fromstring(xml)
     limit_num = xml[1].text
+    logbook.info(limit_num)
     if int(limit_num) == 0:
         return
     code = api.post('statuses/update',status=content)
+    logbook.info(content)
     logbook.info("sent!")
 
 if __name__ == '__main__':
@@ -48,4 +52,4 @@ if __name__ == '__main__':
 
     while True:
         directmsg()
-        time.sleep(60)
+        time.sleep(10)
